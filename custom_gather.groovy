@@ -38,9 +38,12 @@ file.withReader { reader ->
 		// Fetch the XML file
 		String xmlText = new URL(line).getText();
 		Node rootNode  = new XmlParser().parseText(xmlText)
+	    // Figure out the Node to use to split the document
+	    def Node = Eval.x(rootNode, 'x.'+xmlNode)
+		
 		def i = 0
 
-		rootNode."${xmlNode}".each { node ->
+		Node.each { node ->
 			// Check to see if the update has been stopped
 			if (i % 100 == 0) {
 				if (config.isUpdateStopped()) {
