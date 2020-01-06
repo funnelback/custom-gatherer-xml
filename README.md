@@ -16,6 +16,8 @@ Supports the following collection.cfg settings:
 
 ### xml.node
 
+Used to define the node that will be used to split the XML file into individual records.  This element also forms the outer element in each stored record.
+
 *Values:* path to a element in GPath style (dot-notation) / * (all children, default)
 
 eg. 
@@ -41,10 +43,39 @@ feed.xml
 	</book>
 </books>
 ```
+## Examples: 
 
 xml.node=book // store \<book\> records
 
+Stored records look like:
+
+```
+<book>
+	<info>
+		<title> The Adventures Of Sherlock Holmes </title>
+		<author> Arthur Conan Doyle </author>
+	</info>
+	<contents>
+		<chapter>A Scandal in Bohemia</chapter>
+		<chapter>The Red-headed League</chapter>
+		...
+		<chapter>The Adventure of the Copper Beeches</chapter>
+	</contents>
+</book>
+```
+
 xml.node=book.contents // store only \<contents\> records from \<book\> node
+
+Stored records look like:
+
+```
+<contents>
+	<chapter>A Scandal in Bohemia</chapter>
+	<chapter>The Red-headed League</chapter>
+	...
+	<chapter>The Adventure of the Copper Beeches</chapter>
+</contents>
+```
 
 ### xml.debug
 
